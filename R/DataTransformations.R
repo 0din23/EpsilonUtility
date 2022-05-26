@@ -113,7 +113,7 @@ transformPrice <- function(DF, PCT=NULL, NET=NULL, SMA_DISTANCE = NULL,
     N <- ncol(df)
     if(!is.null(SMA)){
       for(j in 1:length(SMA)){
-        for(i in 8:N){
+        for(i in 3:N){
           df <- df %>%
             mutate(!!paste0(colnames(df)[i], "_SMA", SMA[j]) :=  SMA(x = df %>% pull(colnames(df)[i]), n = SMA[j]))
         }
@@ -124,7 +124,7 @@ transformPrice <- function(DF, PCT=NULL, NET=NULL, SMA_DISTANCE = NULL,
     N <- ncol(df)
     if(!is.null(LAG)){
       for(j in 1:length(LAG)){
-        for(i in 8:N){
+        for(i in 3:N){
           df <- df %>%
             mutate(!!paste0(colnames(df)[i], "_LAG", LAG[j]) :=  LAG(x = df %>% pull(colnames(df)[i]), LAG[j]))
         }
