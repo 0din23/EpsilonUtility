@@ -78,13 +78,13 @@ rollVol <- function(ts,lag, forward = F){
   if(forward){
     for(k in 1:(nrow(temp)-lag)){
       w <- c(k:(k+lag))
-      temp$erg[k] <- sqrt(sum((temp$ts[w] - mean(temp$ts[w])^2)))
+      temp$erg[k] <- sqrt(sum((temp$ts[w] - mean(temp$ts[w]))^2))
 
     }
   }else{
     for(k in (lag+1):nrow(temp)){
       w <- c((k-lag):k)
-      temp$erg[k] <- sqrt(sum((temp$ts[w] - mean(temp$ts[w])^2)))
+      temp$erg[k] <- sqrt(sum((temp$ts[w] - mean(temp$ts[w]))^2))
     }
   }
   temp %>% pull(erg)
