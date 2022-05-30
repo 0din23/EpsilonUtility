@@ -113,7 +113,7 @@ Pred_Filter <- function(data, label, th, features){
     }, error = function(cond){
       TRUE
     })
-    if(is.na(val)){val <- 0}
+    if(is.na(val)|is.null(val)){val <- 0}
     if(val < th | catcher){
       cutout <- append(cutout, colnames(data)[k])
     }
