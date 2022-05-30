@@ -68,6 +68,29 @@ rollCorr <- function(bench, ts, lag){
   }
   temp$erg
 }
+# Rolling hVol #################################################################
+rollVol <- function(ts,lag, forward = F){
+  # Create df
+  temp <-data.frame(
+    "ts"=as.numeric(ts),
+    "erg"=NA
+  )
+  if(forward){
+    for(k in 1:(nrow(temp)-lag)){
+      w <- c(k:(k+lag))
+      temp$erg[k] <- sqrt(sum((temp$ts[w] - mean(temp$ts[w])^2)))
+
+    }
+  }else{
+    for(k in (lag+1):nrow(temp)){
+      w <- c((k-lag):k)
+      temp$erg[k] <- sqrt(sum((temp$ts[w] - mean(temp$ts[w])^2)))
+    }
+  }
+  temp %>% pull(erg)
+}
+
+
 
 # Rolling Beta #################################################################
 rollBeta <- function(bench, ts, lag){
