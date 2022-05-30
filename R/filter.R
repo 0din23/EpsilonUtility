@@ -10,7 +10,7 @@ COR_Filter <- function(data, label, th, features){
     }, error = function(cond){
       TRUE
     })
-    if(is.na(COR)){COR <- 0}
+    if(is.na(COR) | is.null(COR) | !exists("COR")){COR <- 0}
     if(COR < th | catcher){
       cutout <- append(cutout, colnames(data)[k])
     }
@@ -113,7 +113,7 @@ Pred_Filter <- function(data, label, th, features){
     }, error = function(cond){
       TRUE
     })
-    if(is.na(val)|is.null(val)){val <- 0}
+    if(is.na(val) | is.null(val) | !exists("val")){val <- 0}
     if(val < th | catcher){
       cutout <- append(cutout, colnames(data)[k])
     }
