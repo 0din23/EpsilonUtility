@@ -129,7 +129,7 @@ ADF_Filter <- function(data, th, drift = F, features){
   for(k in 1:ncol(data)){
 
     catcher <- tryCatch({
-      p_val <- adf.test(pull(data[,k]), output = F)
+      p_val <- adf.test(data %>% pull(k), output = F)
       if(drift){p_val <- p_val$type2[,3] %>% mean() } else{p_val <- p_val$type1[,3] %>% mean() }
 
       FALSE
