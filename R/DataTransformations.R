@@ -67,6 +67,15 @@ transformHLOC <- function(DF, PCT=NULL, NET=NULL, SMA_DISTANCE = NULL,
         }
       }
     }
+
+    ### SMA_Distance
+    if(!is.null(SMA_DISTANCE)){
+      for(j in 1:length(SMA_DISTANCE)){
+        df <- df %>%
+          mutate(!!paste0("SMA_DISTANCE", SMA_DISTANCE[j]) :=  (adjusted - SMA(adjusted, SMA_DISTANCE[j])/adjusted))
+      }
+    }
+
     df
   }) %>%
     rbindlist() %>%
