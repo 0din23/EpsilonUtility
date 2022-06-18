@@ -144,7 +144,7 @@ transformPrice <- function(DF, PCT=NULL, NET=NULL, SMA_DISTANCE = NULL,
     if(!is.null(SMA_DISTANCE)){
       for(j in 1:length(SMA_DISTANCE)){
         df <- df %>%
-          mutate(!!paste0("SMA_DISTANCE", SMA_DISTANCE[j]) :=  (price - SMA(adjusted, SMA_DISTANCE[j])/price))
+          mutate(!!paste0("SMA_DISTANCE", SMA_DISTANCE[j]) :=  (price - SMA(price, SMA_DISTANCE[j])/price))
       }
     }
 
