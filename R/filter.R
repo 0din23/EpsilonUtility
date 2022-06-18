@@ -117,7 +117,6 @@ Pred_Filter <- function(data, label, th, features){
     if(val < th | catcher){
       cutout <- append(cutout, colnames(data)[k])
     }
-    print(paste0(k, " out of ", ncol(data)))
   }
   return(features[!(features %in% cutout)])
 }
@@ -140,7 +139,6 @@ ADF_Filter <- function(data, th, drift = F, features){
     if(p_val > th | catcher){
       cutout <- append(cutout, colnames(data)[k])
     }
-    print(paste0(k, " out of ", ncol(data)))
   }
   return(features[!(features %in% cutout)])
 }
