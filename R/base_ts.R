@@ -26,7 +26,7 @@ dateSplicer_long <- function(DF, dates){
   lapply(1:length(symbols), function(x){
 
     temp <- DF %>%
-      filter(symbol == symbols[x]) %>%
+      filter(symbol == symbols[x])
     temp <- dateSplicer(df=temp, dates)
     return(temp)
   }) %>%
