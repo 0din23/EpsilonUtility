@@ -1,30 +1,33 @@
-cumRet <- function (RET)
-{
+cumRet <- function (RET) {
   tmp = as.vector(RET)
   tmp[is.na(tmp)] = 0
   tmp = tmp + 1
   for (k in 2:length(tmp)) {
     tmp[k] = tmp[k] * tmp[k - 1]
   }
-  # RET = xts(tmp, order.by = index(RET))
   tmp
 }
 ################################################################################
 # FILL TS Dates #
 ################################################################################
-dateSplicerLong <- function(DF, dates){
-  symbols <- indicators %>% pull(symbol) %>% unique()
+dateSplicer <- function(df, dates){
+  df %>%
+    full_join(.,data.frame(
+      "date"=dates
+    )) %>%
+    arrange(as.Date(date)) %>%
+    na_last_fill()
+}
+
+
+
+dateSplicer_long <- function(DF, dates){
+  symbols <- DF %>% pull(symbol) %>% unique()
   lapply(1:length(symbols), function(x){
 
     temp <- DF %>%
-      filter(symbol == symbols[x])
-    temp <- temp %>%
-      full_join(.,data.frame(
-        "date"=dates
-      )) %>%
-      mutate(symbol =symbols[x]) %>%
-      arrange(as.Date(date)) %>%
-      na_last_fill()
+      filter(symbol == symbols[x]) %>%
+    temp <- dateSplicer(df=temp, dates)
     return(temp)
   }) %>%
     rbindlist()

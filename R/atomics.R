@@ -1,6 +1,6 @@
 # A bunch of functions to use the epsilon datbase outputs.
 
-#' Cmy Print Method
+#' My Print Method
 #'
 #' @param ... as many strings as one wants
 #' @return NULL

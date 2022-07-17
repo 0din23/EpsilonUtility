@@ -14,10 +14,8 @@ COR_Filter <- function(data, label, th, features){
     if(COR < th | catcher){
       cutout <- append(cutout, colnames(data)[k])
     }
-    print(paste0(k, " out of ", ncol(data)))
   }
   return(features[!(features %in% cutout)])
-  #return(cutout)
 }
 
 # Rolling Corr Filter ##########################################################
@@ -42,34 +40,9 @@ rollCOR_Filter <- function(data, label, quant){
       cutout <- append(cutout, colnames(data)[k])
     }
   }
-  cutout
+  return(features[!(features %in% cutout)])
 }
-# Inter Corr Filter ############################################################
-# interCOR_Filter <- function(data, label, th){
-#
-#   cutout <- NULL
-#   for(k in 1:ncol(data)){
-#     a <- pull(data[,k])
-#     J <- c(1:ncol(data))[c(1:ncol(data))!=k]
-#
-#     for(j in J){
-#       b <- pull(data[,j])
-#       ab <- cor(cbind(data[,k], data[,j]) %>% na.omit())[1,2]
-#       if(abs(ab) > th){
-#
-#         ca <- cor(cbind(label,data[,k]) %>% na.omit())[1,2]
-#         cb <- cor(cbind(label,data[,j]) %>% na.omit())[1,2]
-#
-#         if(abs(ca) > abs(cb)){
-#           cutout <- append(cutout, colnames(data)[j])
-#         } else{
-#           cutout <- append(cutout, colnames(data)[k])
-#         }
-#       }
-#     }
-#   }
-#   cutout %>% unique()
-# }
+
 
 interCOR_Filter <- function(data, label, th, features){
 
