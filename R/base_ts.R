@@ -59,17 +59,14 @@ normEL <- function(base, el){
 # rolling Indicators
 ################################################################################
 # Rolling Correlation ##########################################################
-rollCorr <- function(bench, ts, lag){
-  temp <-data.frame(
-    "bench"=bench,
-    "ts"=as.numeric(ts),
-    "erg"=NA
-  )
-  for(k in lag:nrow(temp)){
-    w <- c((k-(lag-1)):k)
-    temp$erg[k] <- cor(temp$bench[w], temp$ts[w])
-  }
-  temp$erg
+rollCorr <- function(df, col1, col2, lag){
+
+  df <- df %>% select(col1, col2)
+
+  rollapply(df, width=lag, function(x){cor(x[,1], x[,2])} ,
+            by.column=FALSE) %>%
+    return()
+
 }
 # Rolling hVol #################################################################
 rollVol <- function(ts,lag, forward = F){

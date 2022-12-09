@@ -5,7 +5,7 @@ COR_Filter <- function(data, label, th, features){
   for(k in 1:ncol(data)){
 
     catcher <- tryCatch({
-      COR <- abs(cor(cbind(label,data[,k]) %>% na.omit())[1,2])
+      COR <- abs(cor(cbind(as.numeric(label),as.numeric(data[,k])) %>% na.omit())[1,2])
       FALSE
     }, error = function(cond){
       TRUE
