@@ -64,7 +64,7 @@ rollCorr <- function(df, col1, col2, lag){
   df <- df %>% select(col1, col2)
 
   rollapply(df, width=lag, function(x){cor(x[,1], x[,2])} ,
-            by.column=FALSE) %>%
+            by.column=FALSE, align = "right") %>%
     return()
 
 }
@@ -181,6 +181,23 @@ rollReturns <- function(ts, lag, forward = FALSE){
   }
   temp %>% pull(erg)
 }
+
+
+
+
+
+###############################################################################
+rollMean <- function(ts, lag){
+
+
+
+  rollapply(df, width=lag, function(x){cor(x[,1], x[,2])} ,
+            by.column=FALSE) %>%
+    return()
+
+}
+
+
 
 ###############################################################################
 ConstructPairSet <- function(s1, s2, from, to){
